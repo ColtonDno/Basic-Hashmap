@@ -24,7 +24,6 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
       return -1;
   }
   v.insert(it, key);
-  cout <<"Hash: " << hash(key) << " Index: " << index << " Value: " << v.at(index) << endl;
 
   return 0;
 }
@@ -36,9 +35,9 @@ int MidSquareHash<T, B>::MidSquareHash::search(T key)
   it += hash(key);
   int index = distance(v.begin(), it);
 
-  while (v.at(index) != key)
+  while (index < (size - 1) && v.at(index) != key)
   {
-    if (index > size)
+    if (index >= size)
       return -1;
     
     it += 1;
@@ -58,10 +57,7 @@ int MidSquareHash<T, B>::MidSquareHash::deleteHash(T key)
   if (index < 0)
     return 0;
   
-  cout << "Index: " << index << endl;
-
   typename vector<T>::iterator it = v.begin() + index;
-  cout << "It: " << distance(v.begin(), it) << endl;
   v.erase(it);
 
   return 1;
