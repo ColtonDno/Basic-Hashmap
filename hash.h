@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <typeinfo>
 #include <math.h>
 using namespace std;
 
@@ -21,7 +22,7 @@ class MidSquareHash
     //int resize();
   
   private:
-    vector<T> v;
+    vector<T*> v;
     int size;
 };
 #include "hash.tpp"

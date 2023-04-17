@@ -7,42 +7,44 @@ using namespace std;
 
 int main()
 {
-  MidSquareHash<int> hashmap;
-  int input = 0;
+  MidSquareHash<char> hashmap;
+  char value_input;
+
+  int menu_input = 0;
   string s_input;
   
   do
   {
-    switch (input)
+    switch (menu_input)
     {
       case (1):
         cout << "What value would you like to store? ";
-        cin >> input;
-        input = hashmap.insert(input);
-        if (input == -1)
+        cin >> value_input;
+        menu_input = hashmap.insert(value_input);
+        if (menu_input == -1)
           cout << "Unable to store value.";
-        else if (input == -2)
+        else if (menu_input == -2)
           cout << "Value is already being stored." << endl;
         else
           cout << "Value successfully inserted." << endl;
         break;
       case (2):
         cout << "What value would you like to delete? ";
-        cin >> input;
-        input = hashmap.deleteHash(input);
-        if (input == -1)
+        cin >> value_input;
+        menu_input = hashmap.deleteHash(value_input);
+        if (menu_input == -1)
           cout << "Value was not in the table";
         else
           cout << "Value successfully deleted." << endl;
         break;
       case (3):
         cout << "What value would you like to search for? ";
-        cin >> input;
-        input = hashmap.search(input);
-        if (input == -1)
+        cin >> value_input;
+        menu_input = hashmap.search(value_input);
+        if (menu_input == -1)
           cout << "Value not found.";
         else
-          cout << "Value found at index " << input << "." << endl;
+          cout << "Value found at index " << menu_input << "." << endl;
         break;
       case (4):
         hashmap.print();
@@ -57,9 +59,9 @@ int main()
     cout << "3) Search" << endl;
     cout << "4) Print" << endl;
     cout << "5) Exit" << endl;
-    cin >> input;
+    cin >> menu_input;
 
-  } while (input != 5);
+  } while (menu_input != 5);
 
   return 0;
 }
