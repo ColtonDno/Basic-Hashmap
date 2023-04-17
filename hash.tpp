@@ -15,15 +15,13 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
   int index = distance(v.begin(), it);
   while (v.at(index) != 0x80000001)
   {
-    cout << "Index: " << index << " size: " << size<< endl;
-    
     it += 1;
     index += 1;
     
     if (index > size)
       return -1;
   }
-  v.insert(it, key);
+  v.at(index) = key;
 
   return 0;
 }
@@ -58,7 +56,7 @@ int MidSquareHash<T, B>::MidSquareHash::deleteHash(T key)
     return 0;
   
   typename vector<T>::iterator it = v.begin() + index;
-  v.erase(it);
+  v.at(index) = 0x80000001;
 
   return 1;
 }
@@ -66,6 +64,12 @@ int MidSquareHash<T, B>::MidSquareHash::deleteHash(T key)
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::print()
 {
+  for(int i = 0; i < v.size(); i++)
+  {
+    if (v.at(i) != 0x80000001)
+      cout << "Bucket #" << i << " contains " << v.at(i) << endl;
+  }
+
   return 0;
 }
 
