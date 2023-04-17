@@ -14,12 +14,12 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
   typename vector<T>::iterator it = v.begin();
   it += hash(key);
   int index = distance(v.begin(), it);
-  while (v.at(index) != 0x80000001)//TO-DO Throwing out of bounds
+  while (v.at(index) != 0x80000001)
   {
     it += 1;
     index += 1;
     
-    if (index > size)
+    if (index >= size)
       return -1;
   }
   v.at(index) = key;
