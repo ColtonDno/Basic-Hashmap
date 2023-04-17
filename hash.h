@@ -14,7 +14,7 @@ class MidSquareHash
     MidSquareHash(int size = 10);
     int insert(T data);
     int search(T key);
-    int deleteHash();
+    int deleteHash(T key);
     int print();
     int hash(T key);
     int getSize();

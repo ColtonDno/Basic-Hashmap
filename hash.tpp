@@ -52,9 +52,19 @@ int MidSquareHash<T, B>::MidSquareHash::search(T key)
 }
 
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
-int MidSquareHash<T, B>::MidSquareHash::deleteHash()
+int MidSquareHash<T, B>::MidSquareHash::deleteHash(T key)
 {
-  return 0;
+  int index = search(key);
+  if (index < 0)
+    return 0;
+  
+  cout << "Index: " << index << endl;
+
+  typename vector<T>::iterator it = v.begin() + index;
+  cout << "It: " << distance(v.begin(), it) << endl;
+  v.erase(it);
+
+  return 1;
 }
   
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>

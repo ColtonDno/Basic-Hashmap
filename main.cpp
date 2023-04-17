@@ -7,13 +7,14 @@ using namespace std;
 
 int main()
 {
-  MidSquareHash<int> hashmap;
+  MidSquareHash<int> hashmap(5);
   int data = 4;
   hashmap.insert(data);
 
   cout << hashmap.search(data) << endl;
-  //hashmap.deleteHash(data);
-  //cout << hashmap.search(data) << endl;
+  hashmap.deleteHash(data);
+  cout << "Deleted" << endl;
+  cout << hashmap.search(data) << endl;
 
   return 0;
 }
