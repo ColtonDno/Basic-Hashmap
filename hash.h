@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 using namespace std;
 
 template<class T, std::enable_if_t<

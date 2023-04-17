@@ -2,16 +2,29 @@ template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
 MidSquareHash<T, B>::MidSquareHash(int u_size)
 {
   v.reserve(u_size);
+  for (int i = 0; i < u_size; i++)
+    v.emplace_back(0x80000001);
   size = u_size;
 }
 
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::insert(T key)
 {
-  iterator it = v.begin();
+  typename vector<T>::iterator it = v.begin();
   it += hash(key);
+  int index = distance(v.begin(), it);
+  while (v.at(index) != 0x80000001)
+  {
+    cout << "Index: " << index << " size: " << size<< endl;
+    
+    it += 1;
+    index += 1;
+    
+    if (index > size)
+      return -1;
+  }
   v.insert(it, key);
-  cout << v.at(it) << endl;
+  cout <<"Hash: " << hash(key) << " Index: " << index << " Value: " << v.at(index) << endl;
 
   return 0;
 }
@@ -19,12 +32,23 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::search(T key)
 {
-  iterator it = begin();
+  typename vector<T>::iterator it = v.begin();
   it += hash(key);
-  if (v.at(it) == key)
-    return static_cast<int>(it);
+  int index = distance(v.begin(), it);
 
-  return 0;
+  while (v.at(index) != key)
+  {
+    if (index > size)
+      return -1;
+    
+    it += 1;
+    index += 1;
+  }
+
+  if (v.at(index) == key)
+    return index;
+
+  return -1;
 }
 
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
@@ -43,7 +67,7 @@ int MidSquareHash<T, B>::MidSquareHash::print()
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::hash(T key)
 {
-  return key & size;
+  return abs(key) % size;
 }
 
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>

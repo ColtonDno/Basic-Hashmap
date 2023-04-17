@@ -11,7 +11,9 @@ int main()
   int data = 4;
   hashmap.insert(data);
 
-  cout << hashmap.getSize() << endl;
+  cout << hashmap.search(data) << endl;
+  //hashmap.deleteHash(data);
+  //cout << hashmap.search(data) << endl;
 
   return 0;
 }
