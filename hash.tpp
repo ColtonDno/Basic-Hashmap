@@ -10,10 +10,11 @@ MidSquareHash<T, B>::MidSquareHash(int u_size)
 template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::insert(T key)
 {
+  //TO-DO Check if key is already inserted
   typename vector<T>::iterator it = v.begin();
   it += hash(key);
   int index = distance(v.begin(), it);
-  while (v.at(index) != 0x80000001)
+  while (v.at(index) != 0x80000001)//TO-DO Throwing out of bounds
   {
     it += 1;
     index += 1;

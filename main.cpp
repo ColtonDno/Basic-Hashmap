@@ -8,21 +8,59 @@ using namespace std;
 int main()
 {
   MidSquareHash<int> hashmap;
-  int data = 19;
-  int data2 = 78;
-  int data3 = 34;
-  int data4 = 5;
-  hashmap.insert(data);
-  hashmap.insert(data2);
-  hashmap.insert(data3);
-  hashmap.insert(data4);
+  int input = 0;
+  string s_input;
+  
+  do
+  {
+    /*while(!cin.eof())
+      cin.ignore();*/
+    
+    switch (input)
+    {
+      case (1):
+        cout << "What value would you like to store? ";
+        cin >> input;
+        input = hashmap.insert(input);
+        if (input == -1)
+          cout << "Unable to store value.";
+        else
+          cout << "Value successfully inserted." << endl;
+        break;
+      case (2):
+        cout << "What value would you like to delete? ";
+        cin >> input;
+        input = hashmap.deleteHash(input);
+        if (input == -1)
+          cout << "Value was not in the table";
+        else
+          cout << "Value successfully deleted." << endl;
+        break;
+      case (3):
+        cout << "What value would you like to search for? ";
+        cin >> input;
+        input = hashmap.search(input);
+        if (input == -1)
+          cout << "Value not found.";
+        else
+          cout << "Value found at index " << input << "." << endl;
+        break;
+      case (4):
+        hashmap.print();
+        break;
+      default:
+        break;
+    }
 
-  cout << "Data at: " << hashmap.search(data) << endl;
-  hashmap.deleteHash(data);
-  cout << "Deleted" << endl;
-  cout << hashmap.search(data) << endl;
+    cout << "\nPlease select an option:" << endl;
+    cout << "1) Insert" << endl;
+    cout << "2) Delete" << endl;
+    cout << "3) Search" << endl;
+    cout << "4) Print" << endl;
+    cout << "5) Exit" << endl;
+    cin >> input;
 
-  hashmap.print();
+  } while (input != 5);
 
   return 0;
 }
