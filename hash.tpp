@@ -14,8 +14,13 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
   typename vector<T>::iterator it = v.begin();
   it += hash(key);
   int index = distance(v.begin(), it);
+
+
   while (v.at(index) != 0x80000001)
   {
+    if (search(v.at(index)) == key)
+      return -2;
+      
     it += 1;
     index += 1;
     

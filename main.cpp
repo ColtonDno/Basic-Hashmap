@@ -13,9 +13,6 @@ int main()
   
   do
   {
-    /*while(!cin.eof())
-      cin.ignore();*/
-    
     switch (input)
     {
       case (1):
@@ -24,6 +21,8 @@ int main()
         input = hashmap.insert(input);
         if (input == -1)
           cout << "Unable to store value.";
+        else if (input == -2)
+          cout << "Value is already being stored." << endl;
         else
           cout << "Value successfully inserted." << endl;
         break;
