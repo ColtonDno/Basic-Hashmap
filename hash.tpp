@@ -10,18 +10,13 @@ MidSquareHash<T, B>::MidSquareHash(int u_size)
 template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::insert(T key)
 {
-  //TO-DO Check if key is already inserted
-  /*typename vector<T>::iterator it = v.begin();
-  it += hash(key);
-  int index = distance(v.begin(), it);*/
   int index = hash(key);
 
   while (v.at(index) != nullptr)
   {
     if (*v.at(index) == key)
       return -2;
-      
-    //it += 1;
+
     index += 1;
     
     if (index >= size)
@@ -35,12 +30,7 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
 template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::search(T key)
 {
-  /*typename vector<T>::iterator it = v.begin();
-  it += hash(key);
-  int index = distance(v.begin(), it);*/
-  cout << "Searching" << endl;
   int index = hash(key);
-  cout << "Found index: " << index << " for key: " << key << endl;
   
   if (v.at(index) == nullptr)
     return -1;
@@ -50,7 +40,6 @@ int MidSquareHash<T, B>::MidSquareHash::search(T key)
     if (index >= size)
       return -1;
     
-    //it += 1;
     index += 1;
 
     if (v.at(index) == nullptr)
