@@ -42,7 +42,7 @@ int main()
         cin >> value_input;
         menu_input = hashmap.search(value_input);
         if (menu_input == -1)
-          cout << "Value not found.";
+          cout << "Value not found." << endl;
         else
           cout << "Value found at index " << menu_input << "." << endl;
         break;
