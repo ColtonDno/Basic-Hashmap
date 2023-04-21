@@ -1,4 +1,4 @@
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 MidSquareHash<T, B>::MidSquareHash(int u_size)
 {
   v.reserve(u_size);
@@ -7,7 +7,7 @@ MidSquareHash<T, B>::MidSquareHash(int u_size)
   size = u_size;
 }
 
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::insert(T key)
 {
   //TO-DO Check if key is already inserted
@@ -32,13 +32,18 @@ int MidSquareHash<T, B>::MidSquareHash::insert(T key)
   return 0;
 }
 
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::search(T key)
 {
   /*typename vector<T>::iterator it = v.begin();
   it += hash(key);
   int index = distance(v.begin(), it);*/
+  cout << "Searching" << endl;
   int index = hash(key);
+  cout << "Found index: " << index << " for key: " << key << endl;
+  
+  if (v.at(index) == nullptr)
+    return -1;
 
   while (index < (size - 1) && *v.at(index) != key)
   {
@@ -47,6 +52,9 @@ int MidSquareHash<T, B>::MidSquareHash::search(T key)
     
     //it += 1;
     index += 1;
+
+    if (v.at(index) == nullptr)
+      return -1;
   }
 
   if (*v.at(index) == key)
@@ -55,7 +63,7 @@ int MidSquareHash<T, B>::MidSquareHash::search(T key)
   return -1;
 }
 
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::deleteHash(T key)
 {
   int index = search(key);
@@ -67,7 +75,7 @@ int MidSquareHash<T, B>::MidSquareHash::deleteHash(T key)
   return 1;
 }
   
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::print()
 {
   for(int i = 0; i < v.size(); i++)
@@ -80,13 +88,13 @@ int MidSquareHash<T, B>::MidSquareHash::print()
 }
 
 
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::hash(T key)
 {
-  return abs(key) % size;
+  return abs(static_cast<int>(key)) % size;
 }
 
-template <typename T, std::enable_if_t<std::is_integral<T>::value, bool> B>
+template <typename T, std::enable_if_t<std::is_fundamental<T>::value, bool> B>
 int MidSquareHash<T, B>::MidSquareHash::getSize()
 {
   return size;

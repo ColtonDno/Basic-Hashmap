@@ -8,7 +8,7 @@
 using namespace std;
 
 template<class T, std::enable_if_t<
-    std::is_integral<T>::value, bool> = true>
+    std::is_fundamental<T>::value, bool> = true>
 class MidSquareHash
 {
   public:

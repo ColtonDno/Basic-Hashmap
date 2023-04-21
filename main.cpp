@@ -7,8 +7,8 @@ using namespace std;
 
 int main()
 {
-  MidSquareHash<char> hashmap;
-  char value_input;
+  MidSquareHash<int> hashmap;
+  int value_input;
 
   int menu_input = 0;
   string s_input;
