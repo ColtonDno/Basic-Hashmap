@@ -32,22 +32,21 @@ int MidSquareHash<T, B>::MidSquareHash::search(T key)
 {
   int index = hash(key);
   
-  if (v.at(index) == nullptr)
-    return -1;
-
-  while (index < (size - 1) && *v.at(index) != key)
+  while (index < (size - 2))
   {
-    if (index >= size)
-      return -1;
+    while (v.at(index) == nullptr)
+    {
+      index += 1;
     
-    index += 1;
+      if (index >= size)
+        return -1;
+    }
 
-    if (v.at(index) == nullptr)
-      return -1;
+    if (*v.at(index) == key)
+      return index;
+    else
+      index += 1;
   }
-
-  if (*v.at(index) == key)
-    return index;
 
   return -1;
 }
